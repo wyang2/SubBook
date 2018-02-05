@@ -4,6 +4,14 @@
 * You can find a copy of the license in this project. Otherwise, please contact contact wyang2@ualberta.ca
  */
 
+
+/**
+ * Provide an interface to displaying information of all subscriptions and displaying number of subscriptions
+ * and total charge of all subscriptions in textviews. Press add button will switch to newSubscription class
+ * which enable user to create a new subscription.  Clicking on an item in listview will lead you to view
+ * its detailed information. Quit won't clear the information because of a copy of arrayList information is
+ * stored locally.
+ */
 package com.example.yangwenhan.subbook;
 
 import android.app.Activity;
@@ -110,12 +118,13 @@ its position, so i only need variable i to tell me which subscription is that I 
 
 
 /*
-    Used with onActivityForResult, when came back from other activities it will make some
+    Used with StartActivityForResult, when came back from other activities it will make some
      adjustment according to the changes in arraylist by specify requestCode and resultCode
      */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // If click add button
         if (requestCode == 1 && resultCode == RESULT_OK) {
             loadFromFile();
             subList = (ListView) findViewById(R.id.subscriptions);
@@ -123,7 +132,7 @@ its position, so i only need variable i to tell me which subscription is that I 
             subList.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
-
+        // If click items in listview
         if (requestCode == 2) {
             if (resultCode == RESULT_OK) {
                 loadFromFile();

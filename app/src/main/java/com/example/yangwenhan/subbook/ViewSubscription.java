@@ -1,3 +1,16 @@
+/* Copyright © 2018. CMPUT301 Wi18, University of Alberta - All Rights Reserved.
+* You may use, distribute or modify this code under terms and conditions of Code of Student Behavior at
+* University of Alberta.
+* You can find a copy of the license in this project. Otherwise, please contact contact wyang2@ualberta.ca
+ */
+
+
+/**
+ * ViewSubscription class will get the index of the subscription that user click and shows its the
+ * details of the subscription and display them on testviews.  Inside the class user is also able to
+ * click edit button to editSubscription.class to modify their subscriptions or delete it and switch
+ * back to mainactivity class.
+ */
 package com.example.yangwenhan.subbook;
 
 import android.app.Activity;
@@ -99,6 +112,13 @@ public class ViewSubscription extends AppCompatActivity {
 
     }
 
+    /**
+     * if user click edit button, by comparing resultcode and requestcode onActivityResult
+     * will do some adjustment.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 3){
             if (resultCode == RESULT_OK){

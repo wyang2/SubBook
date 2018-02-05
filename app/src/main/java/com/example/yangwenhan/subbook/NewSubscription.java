@@ -1,3 +1,15 @@
+/* Copyright © 2018. CMPUT301 Wi18, University of Alberta - All Rights Reserved.
+* You may use, distribute or modify this code under terms and conditions of Code of Student Behavior at
+* University of Alberta.
+* You can find a copy of the license in this project. Otherwise, please contact contact wyang2@ualberta.ca
+ */
+
+
+/**
+ * Provide an class for user to add a new subscription and store the info in a public arraylist.
+ * Also able to handle invalid input.  Press save button to save subscription and back to mainactivity
+ * class. An invalid input will display an error message and drive you back to the mainActivity class.
+ */
 package com.example.yangwenhan.subbook;
 
 import android.app.Activity;
@@ -61,21 +73,21 @@ public class NewSubscription extends AppCompatActivity {
             public void onClick(View view) {
                 sub_name = name.getText().toString();
 
-                if (sub_name.matches("")) {
+                if (sub_name.matches("")) {  //check if name is empty
                     Toast.makeText(NewSubscription.this, "Name cannot be empty", Toast.LENGTH_LONG).show();
                     finish();
                 } else {
                     sub_charge = charge.getText().toString();
-                    if (sub_charge.matches("")) {
+                    if (sub_charge.matches("")) {  //check if charge is empty
                         Toast.makeText(NewSubscription.this, "Charge cannot be empty you may type 0", Toast.LENGTH_LONG).show();
                         finish();
                     } else {
-                        if (Float.parseFloat(sub_charge) < 0) {
+                        if (Float.parseFloat(sub_charge) < 0) {  //check if charge < 0
                             Toast.makeText(NewSubscription.this, "Charge cannot be negative", Toast.LENGTH_LONG).show();
                             finish();
                         } else {
                             sub_date = date.getText().toString();
-                            if (sub_date.matches("")) {
+                            if (sub_date.matches("")) {  //check if date is empty
                                 Toast.makeText(NewSubscription.this, "Date cannot be empty, default to current date", Toast.LENGTH_LONG).show();
                                 Date temp_date = new Date();
                                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -93,7 +105,7 @@ public class NewSubscription extends AppCompatActivity {
                                 try {
                                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                                     temp_date = df.parse(sub_date);
-                                    if (!sub_date.equals(df.format(temp_date))) {
+                                    if (!sub_date.equals(df.format(temp_date))) {  //check if date format is correct
                                         Toast.makeText(NewSubscription.this, "Date format must be yyyy-MM-dd", Toast.LENGTH_LONG).show();
                                         finish();
                                     } else {
@@ -106,7 +118,7 @@ public class NewSubscription extends AppCompatActivity {
                                         setResult(RESULT_OK, intent);
                                         finish();
                                     }
-                                } catch (ParseException pe) {
+                                } catch (ParseException pe) { //handle invalid date format error
                                     Toast.makeText(NewSubscription.this, "Invalid date format", Toast.LENGTH_LONG).show();
                                     finish();
                                 }

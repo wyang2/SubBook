@@ -1,3 +1,15 @@
+/* Copyright © 2018. CMPUT301 Wi18, University of Alberta - All Rights Reserved.
+* You may use, distribute or modify this code under terms and conditions of Code of Student Behavior at
+* University of Alberta.
+* You can find a copy of the license in this project. Otherwise, please contact contact wyang2@ualberta.ca
+ */
+
+
+/**
+ * An class for user to modify subscription information and able to handle invalid input as well.
+ * Press save button to go back to mainactivity.  Cancel button will lead you back to view detail
+ * activity.  Invalid input will display a error message and drive you back to viewSubscription activity.
+ */
 package com.example.yangwenhan.subbook;
 
 import android.app.Activity;
@@ -56,6 +68,10 @@ public class EditSubscription extends AppCompatActivity {
             }
         });
 
+        /**Handle user inputs, check if all inputs are valid then add subscription to the arraylist, else
+         * will show a error message and quit to the viewSubscription activity.
+         */
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,21 +82,21 @@ public class EditSubscription extends AppCompatActivity {
                 name = reName.getText().toString();
                 comment = reComment.getText().toString();
 
-                if (name.matches("")){
+                if (name.matches("")){  //check if name is empty
                     Toast.makeText(EditSubscription.this,"Name cannot be empty", Toast.LENGTH_LONG).show();
                     finish();
                 }else {
                     charge = reCharge.getText().toString();
-                    if (charge.matches("")) {
+                    if (charge.matches("")) {  //check if charge is empty
                         Toast.makeText(EditSubscription.this, "Charge cannot be empty you may type 0", Toast.LENGTH_LONG).show();
                         finish();
                     } else {
-                        if (Float.parseFloat(charge) < 0) {
+                        if (Float.parseFloat(charge) < 0) {  //check if charge < 0
                             Toast.makeText(EditSubscription.this, "Charge cannot be negative", Toast.LENGTH_LONG).show();
                             finish();
                         }
                         dateString = reDate.getText().toString();
-                        if (dateString.matches("")){
+                        if (dateString.matches("")){  //check if date is empty, if is, default to current date.
                             Toast.makeText(EditSubscription.this,"Date cannot be empty, default to current date",Toast.LENGTH_LONG).show();
                             Date updateDate = new Date();
                             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -99,7 +115,7 @@ public class EditSubscription extends AppCompatActivity {
                             try{
                                 DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                 temp_date = sdf.parse(dateString);
-                                if (!dateString.equals(sdf.format(temp_date))) {
+                                if (!dateString.equals(sdf.format(temp_date))) {  //check if date format is correct
                                     Toast.makeText(EditSubscription.this,"Wrong date format, deafult to current date",Toast.LENGTH_LONG).show();
                                     Date updateDate = new Date();
                                     dateString = sdf.format(updateDate);
@@ -114,7 +130,7 @@ public class EditSubscription extends AppCompatActivity {
                                     setResult(RESULT_OK);
                                     finish();
                                 }
-                            } catch (ParseException pe){
+                            } catch (ParseException pe){  //handle date type error
                                 Toast.makeText(EditSubscription.this,"Invalid date format",Toast.LENGTH_LONG).show();
                                 finish();
                             }
